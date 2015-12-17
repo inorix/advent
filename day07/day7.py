@@ -6,26 +6,27 @@ def solve(wire):
     #argument was a number so just return that
     if wire.isdigit():
         return int(wire)
-    #load actual wire data
-    wire_cur = wires[wire]
     #already solved, return value
-    if type(wire_cur[-1]) == int:
-        return wire_cur[-1]
+    if type(wires[wire][-1]) == int:
+        return wires[wire][-1]
     #parse command and recursively solve missing input wires
     #the result is stored in the last (unused) index of the list which originally contains wire name (which we also have as the dictionary index)
-    o = wire_cur[1]
-    if wire_cur[0] == 'NOT':
-        wires[wire][-1] = ~solve(wire_cur[1]) & 0xFFFF
-    elif o == '->':
-        wires[wire][-1] = solve(wire_cur[0])
-    elif o == 'AND':
-        wires[wire][-1] = solve(wire_cur[0]) & solve(wire_cur[2])
-    elif o == 'OR':
-        wires[wire][-1] = solve(wire_cur[0]) | solve(wire_cur[2])
-    elif o == 'LSHIFT':
-        wires[wire][-1] = solve(wire_cur[0]) << solve(wire_cur[2])
-    elif o == 'RSHIFT':
-        wires[wire][-1] = solve(wire_cur[0]) >> solve(wire_cur[2])
+    operator = wires[wire][1]
+    input1 = wires[wire][0]
+    input2 = wires[wire][2]
+    #NOT is conveniently placed at another index than the rest of operators
+    if wires[wire][0] == 'NOT':
+        wires[wire][-1] = ~solve(wires[wire][1]) & 0xFFFF
+    elif operator == '->':
+        wires[wire][-1] = solve(input1)
+    elif operator == 'AND':
+        wires[wire][-1] = solve(input1) & solve(input2)
+    elif operator == 'OR':
+        wires[wire][-1] = solve(input1) | solve(input2)
+    elif operator == 'LSHIFT':
+        wires[wire][-1] = solve(input1) << solve(input2)
+    elif operator == 'RSHIFT':
+        wires[wire][-1] = solve(input1) >> solve(input2)
     return wires[wire][-1]
         
 part1 = solve('a')        
