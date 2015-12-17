@@ -29,9 +29,8 @@ for sprinkles in range(101):
             #multiply it all together
             s = reduce(lambda x, y: x * y, s)
             
-            if s > part1:
             part1 = max(part1, s)
-            if g == 500:
+            if cur == 500:
                 part2 = max(part2, s)
             
 print part1,part2
