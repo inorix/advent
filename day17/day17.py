@@ -1,4 +1,4 @@
-from itertools import combinations, permutations
+from itertools import combinations
 
 input = sorted(map(int, list(open('input.txt'))))
 
@@ -17,7 +17,7 @@ for a in range(minlen, maxlen):
         if sum(b) == 150:
             part2 += 1
     #first sum will be the part 2 answer
-    if not part1 and part2:
+    if not part1:
         print 'Part 2:', part2
     part1 += part2
 
