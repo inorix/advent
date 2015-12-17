@@ -1,12 +1,16 @@
-from itertools import combinations
+from itertools import combinations, permutations
 
-input = map(int, list(open('input.txt')))
+input = sorted(map(int, list(open('input.txt'))))
+
+#calculate minimum and maximum possible amount of containers
+minlen = min([a for a in range(2, len(input)) if sum(input[:-a:-1]) >= 150])-1
+maxlen = max([a for a in range(len(input)) if sum(input[:a]) <= 150])
 
 part1 = 0
 part2 = 0
 
 #loop over amount of containers    
-for a in range(len(input)):
+for a in range(minlen, maxlen):
     part2 = 0
     #check all combinations of a containers
     for b in combinations(input, a):
