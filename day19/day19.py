@@ -16,9 +16,8 @@ for a in range(len(replacements)):
         i = src[j:].index(replacements[a][0])
         # add to the set
         dest.add(src[:j + i] + replacements[a][2] + src[j + i + len(replacements[a][0]):])
-        i += len(replacements[a][0])
         # update the search start pointer
-        j = j + i
+        j = j + len(replacements[a][0])
 
 print len(dest)
 
@@ -36,7 +35,7 @@ while len(src) > 2:
     else:
         a += 1
     # sanity check to avoid infinite loop in case we fail
-    if a > len(replacements):
+    if a > len(replacements)-1:
         print 'no more possible replacements :('
         quit()
 
