@@ -1,4 +1,5 @@
 from string import replace
+from random import shuffle
 
 replacements = [a.strip().split() for a in open('input.txt').readlines()]
 
@@ -26,6 +27,7 @@ replacements = sorted(replacements, key = lambda x: len(x[2]))[::-1]
 
 a = 0
 replaces = 0
+src_bak = src
 # greedily try the replacements from longest to shortest until we arrive at e (hopefully, or any 1 length result)
 while len(src) > 1:
     if replacements[a][2] in src:
@@ -34,10 +36,11 @@ while len(src) > 1:
         a = 0
     else:
         a += 1
-    # sanity check to avoid infinite loop in case we fail
+    # the greedy algorithm was proven to fail in some cases, plan B is to randomize replacements until we succeed
     if a > len(replacements)-1:
-        print 'no more possible replacements :('
-        quit()
+        src = src_bak
+        shuffle(replacements)
+        a = 0
+        replaces = 0
 
 print replaces
-
