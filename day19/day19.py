@@ -27,7 +27,7 @@ replacements = sorted(replacements, key = lambda x: len(x[2]))[::-1]
 
 a = 0
 it = 0
-# greedely try the replacements from longest to shortest until we arrive at e (hopefully, or any 1 length result)
+# greedily try the replacements from longest to shortest until we arrive at e (hopefully, or any 1 length result)
 while len(src) > 2:
     if replacements[a][2] in src:
         src = replace(src, replacements[a][2], replacements[a][0], 1)
@@ -37,7 +37,7 @@ while len(src) > 2:
         a += 1
     # sanity check to avoid infinite loop in case we fail
     if a > len(replacements):
-        'no more possible replacements :('
+        print 'no more possible replacements :('
         quit()
 
 print it
