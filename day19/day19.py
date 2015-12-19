@@ -25,13 +25,13 @@ print len(dest)
 replacements = sorted(replacements, key = lambda x: len(x[2]))[::-1]
 
 a = 0
-it = 0
+replaces = 0
 # greedily try the replacements from longest to shortest until we arrive at e (hopefully, or any 1 length result)
 while len(src) > 1:
     if replacements[a][2] in src:
-        src = replace(src, replacements[a][2], replacements[a][0], 1)
+        replaces += src.count(replacements[a][2])
+        src = replace(src, replacements[a][2], replacements[a][0])
         a = 0
-        it += 1
     else:
         a += 1
     # sanity check to avoid infinite loop in case we fail
@@ -39,5 +39,5 @@ while len(src) > 1:
         print 'no more possible replacements :('
         quit()
 
-print it
+print replaces
 
