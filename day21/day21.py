@@ -16,13 +16,13 @@ def config():
                     if c == d and sum(c):
                         continue
                     # yield cost, damage, armor
-                    yield a[0] + b[0] + c[0] + d[0], a[1] + b[1] + c[1] + d[1], a[2] + b[2] + c[2] + d[2], c[0]+d[0]
+                    yield a[0] + b[0] + c[0] + d[0], a[1] + b[1] + c[1] + d[1], a[2] + b[2] + c[2] + d[2]
 
 part1 = 1000
 part2 = 0
 
 # loop all possible equipments
-for cost, damage, armor, ring in config():
+for cost, damage, armor in config():
     boss_dies = math.ceil(boss_hp / max(1, damage - boss_armor))
     player_dies = math.ceil(100.0 / max(1, boss_damage - armor))
     if player_dies >= boss_dies:
