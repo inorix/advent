@@ -15,6 +15,8 @@ def sim(actions, part):
         if poison_left:
             poison_left = max(poison_left - 1, 0)
             boss_hp -= 3
+            if boss_hp <= 0:
+                return mana_spent
         if shield_left:
             shield_left = max(shield_left - 1, 0)
             armor = 7
@@ -71,7 +73,7 @@ def iterate_actions(pos):
 for part in (1, 2):
     actions = ['M'] * 20
     min_spent = 1000000
-    for i in range(1000000):
+    for i in range(10000000):
         result = sim(actions, part)
         if result:
             min_spent = min(result, min_spent)
