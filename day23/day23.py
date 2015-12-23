@@ -3,8 +3,7 @@ lines = []
 for l in open('input.txt').readlines():
     lines.append(l.strip().split())
 
-def vm(a):
-    r = {'a': a, 'b': 0}
+def vm(r):
     pc = 0
     
     while 0 <= pc < len(lines):
@@ -30,4 +29,4 @@ def vm(a):
         pc += 1
     return r['b']
     
-print vm(0), vm(1)
+print vm({'a': 0, 'b': 0}), vm({'a': 1, 'b': 0})
